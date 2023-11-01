@@ -1,0 +1,18 @@
+CREATE TABLE currencies (
+         id INTEGER PRIMARY KEY AUTOINCREMENT,
+         code varchar(3) UNIQUE NOT NULL,
+         full_name TEXT NOT NULL,
+         sign varchar(5) NOT NULL);
+
+CREATE TABLE exchange_rates (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			base_currency_id INTEGER NOT NULL,
+			target_currency_id INTEGER NOT NULL,
+			rate REAL NOT NULL,
+			FOREIGN KEY (base_currency_id) REFERENCES currencies (id),
+			FOREIGN KEY (target_currency_id) REFERENCES currencies (id),
+			UNIQUE(base_currency_id,target_currency_id)
+			);
+			
+INSERT INTO currencies (code,full_name,sign)
+	VALUES('INR','Ruppe,India','₨');
